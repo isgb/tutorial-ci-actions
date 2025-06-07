@@ -25,6 +25,7 @@ jobs:
         run: nmp run test
     
       deploy:
+        if: {{always()}}
         runs-on: ubuntu-latest
         needs: build
 
