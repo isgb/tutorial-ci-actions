@@ -20,6 +20,9 @@ jobs:
 
       - name: Instalar dependencias
         run: npm install
+      
+      - name: Run test
+        run: nmp run test
          
     # services:
     #   redis:
