@@ -3,7 +3,7 @@ name: Deploy
 on: push
 
 jobs:
-  first_job:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,6 +23,14 @@ jobs:
       
       - name: Run test
         run: nmp run test
+    
+      deploy:
+        runs-on: ubuntu-latest
+        needs: build
+
+        steps:
+          - name: Deploy
+            run: echo "Deploy..."
          
     # services:
     #   redis:
