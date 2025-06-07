@@ -5,25 +5,44 @@ on: push
 jobs:
   first_job:
     runs-on: ubuntu-latest
-    
+
     services:
       redis:
         image: redis
         ports:
           - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
-      - name: Install redis cli
+      - name: Instalar cliente de Redis
         run: sudo apt-get update -y && sudo apt-get install redis-tools -y
-      
-      - name: Test redis
+
+      - name: Esperar a que Redis esté listo
+        run: |
+          for i in {1..10}; do
+            if redis-cli -h redis -p 6379 ping | grep -q PONG; then
+              echo "Redis está listo"
+              break
+            fi
+            echo "Esperando a que Redis esté listo..."
+            sleep 1
+          done
+          if ! redis-cli -h redis -p 6379 ping | grep -q PONG; then
+            echo "Redis no se inició a tiempo" >&2
+            exit 1
+          fi
+
+      - name: Probar conexión a Redis
         run: redis-cli -h redis -p 6379 ping
 
-
-      - name: Print variable
+      - name: Imprimir variable
         run: echo "${{secrets.TOKEN_SECRET}}"
 
-      - name: setup
+      - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
