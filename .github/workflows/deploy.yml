@@ -59,6 +59,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK }}
         with:
+          status: ${{ job.status }}  # <- Aquí agregas el input que falta
           fields: repo,commit,author,job,took
 
     # services:
