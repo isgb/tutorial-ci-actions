@@ -1,6 +1,7 @@
-name: Deploy
+name: Deploy to Azure Static Web Apps
 
-on: workflow-dispatch
+on:
+  workflow_dispatch
 
 jobs:
   build:
