@@ -14,5 +14,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
-      - name:
-        run: ssh -d StrictHostKeyChecking=no azureuser@20.55.25.65 touch hola.txt
+
+      - name: Crear archivo en el servidor remoto
+        run: ssh -o StrictHostKeyChecking=no azureuser@20.55.25.65 "touch hola.txt"
