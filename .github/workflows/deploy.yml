@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Instalar dependencies
         run: npm install
 
       - name: Run tests
