@@ -1,6 +1,6 @@
 BRANCH=$1
 
-if [ "$BRANCH" = "main" ]; then
+if [ "$BRANCH" == "main" ]; then
    DEPLOY_PATH="/home/azureuser/tutorial-ci-actions"
 else
    DEPLOY_PATH="/home/azureuser/stage"
