@@ -17,3 +17,6 @@ jobs:
 
       - name: Crear archivo en el servidor remoto
         run: ssh -o StrictHostKeyChecking=no azureuser@20.55.25.65 "touch hola.txt"
+
+      - name: Deploy to server
+        run: bash deploy.sh
